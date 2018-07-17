@@ -16,14 +16,13 @@ namespace SeleniumFirst
 
         static void Main(string[] args) 
         {
-
         }
 
         [SetUp]
         public void Initialize()
         {
             //Navigate to Google page
-            driver.Navigate().GoToUrl("https://www.google.com");
+            driver.Navigate().GoToUrl("http://executeautomation.com/demosite/index.html?UserName=&Password=&Login=Login");
             Console.WriteLine("Opened URL");
 
         }
@@ -31,11 +30,15 @@ namespace SeleniumFirst
         [Test]
         public void ExecuteTest()
         {
-            //Find the Element
-            IWebElement element = driver.FindElement(By.Name("q"));
+            //Title
+            SeleniumSetMethods.SelectDropDown(driver, "TitleId", "Mr.", "Id");
 
-            //Perform operation
-            element.SendKeys("executeautomation");
+            //Initial
+            SeleniumSetMethods.EnterText(driver, "Initial", "Samarth", "Name");
+
+            //Click
+            SeleniumSetMethods.Click(driver, "Save", "Name");
+
             Console.WriteLine("Executed Test");
         }
 
@@ -48,7 +51,7 @@ namespace SeleniumFirst
         [TearDown]
         public void CleanUp()
         {
-            //close the google web browser
+            //close the web browser
             driver.Close();
             Console.WriteLine("Closed the browser");
         }
