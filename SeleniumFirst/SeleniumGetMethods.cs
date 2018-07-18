@@ -11,22 +11,22 @@ namespace SeleniumFirst
     class SeleniumGetMethods
     {
         //Get the text out of the controls
-        public static string GetText(IWebDriver driver, string element, string elementType)
+        public static string GetText(string element, PropertyType elementType)
         {
-            if (elementType == "Id")
-                return driver.FindElement(By.Id(element)).GetAttribute("value");
-            if (elementType == "Name")
-                return driver.FindElement(By.Name(element)).GetAttribute("value");
+            if (elementType == PropertyType.Id)
+                return PropertiesCollection.driver.FindElement(By.Id(element)).GetAttribute("value");
+            if (elementType == PropertyType.Name)
+                return PropertiesCollection.driver.FindElement(By.Name(element)).GetAttribute("value");
             else return String.Empty;
         }
 
         //Get the value of selected text from drop down list
-        public static string GetTextFromDDL(IWebDriver driver, string element, string elementType)
+        public static string GetTextFromDDL(string element, PropertyType elementType)
         {
-            if (elementType == "Id")
-                return new SelectElement(driver.FindElement(By.Id(element))).AllSelectedOptions.SingleOrDefault().Text;
-            if (elementType == "Name")
-                return new SelectElement(driver.FindElement(By.Name(element))).AllSelectedOptions.SingleOrDefault().Text;
+            if (elementType == PropertyType.Id)
+                return new SelectElement(PropertiesCollection.driver.FindElement(By.Id(element))).AllSelectedOptions.SingleOrDefault().Text;
+            if (elementType == PropertyType.Name)
+                return new SelectElement(PropertiesCollection.driver.FindElement(By.Name(element))).AllSelectedOptions.SingleOrDefault().Text;
             else return String.Empty;
         }
     }
