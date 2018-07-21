@@ -28,13 +28,13 @@ namespace SeleniumFirst
         public EAPageObject Login(string userName, string password)
         {
             //Username
-            txtUserName.SendKeys(userName);
+            txtUserName.EnterText(userName);
 
             //password
-            txtPassword.SendKeys(password);
+            txtPassword.EnterText(password);
 
             //Login
-            btnLogin.Submit();
+            btnLogin.ClickSubmit();
 
             //Return the page object
             return new EAPageObject();
