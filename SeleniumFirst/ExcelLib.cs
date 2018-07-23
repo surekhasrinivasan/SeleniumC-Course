@@ -11,35 +11,61 @@ namespace SeleniumFirst
 {
     class ExcelLib
     {
+        //Another way to work this method
         private static DataTable ExcelToDataTable(string fileName)
         {
-            //open file and returns as Stream
-            FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
-            //Createopenxmlreader via ExcelReaderFactory
-            IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream); //.xlsx
-
-            //Set the First Row as Column Name
-            //excelReader.IsFirstRowAsColumnNames = true;
-
-            excelReader.AsDataSet(new ExcelDataSetConfiguration()
+            using (var stream = File.Open(fileName, FileMode.Open, FileAccess.Read))
             {
-                ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                using (var reader = ExcelReaderFactory.CreateReader(stream))
                 {
-                    UseHeaderRow = true
+                    var result = reader.AsDataSet(new ExcelDataSetConfiguration()
+                    {
+                        ConfigureDataTable = (data) => new ExcelDataTableConfiguration()
+                        {
+                            UseHeaderRow = true
+                        }
+                    });
+
+                    //Get all the Tables
+                    DataTableCollection table = result.Tables;
+                    //Store it in DataTable
+                    DataTable resultTable = table["Sheet1"];
+
+                    //return
+                    return resultTable;
                 }
-            });
-
-            //Return as DataSet
-            DataSet result = excelReader.AsDataSet();
-            
-            //Get all the Tables
-            DataTableCollection table = result.Tables;
-            //Store it in DataTable
-            DataTable resultTable = table["Sheet1"];
-
-            //return
-            return resultTable;
+            }
         }
+
+        //private static DataTable ExcelToDataTable(string fileName)
+        //{
+        //    //open file and returns as Stream
+        //    FileStream stream = File.Open(fileName, FileMode.Open, FileAccess.Read);
+        //    //Createopenxmlreader via ExcelReaderFactory
+        //    IExcelDataReader excelReader = ExcelReaderFactory.CreateOpenXmlReader(stream); //.xlsx
+
+        //    //Set the First Row as Column Name
+        //    //excelReader.IsFirstRowAsColumnNames = true;
+
+        //    var result = excelReader.AsDataSet(new ExcelDataSetConfiguration()
+        //    {
+        //        ConfigureDataTable = (data) => new ExcelDataTableConfiguration()
+        //        {
+        //            UseHeaderRow = true
+        //        }
+        //    });
+
+        //    //Return as DataSet
+        //    //DataSet result = excelReader.AsDataSet();
+            
+        //    //Get all the Tables
+        //    DataTableCollection table = result.Tables;
+        //    //Store it in DataTable
+        //    DataTable resultTable = table["Sheet1"];
+
+        //    //return
+        //    return resultTable;
+        //}
         
 
         static List<Datacollection> dataCol = new List<Datacollection>();
