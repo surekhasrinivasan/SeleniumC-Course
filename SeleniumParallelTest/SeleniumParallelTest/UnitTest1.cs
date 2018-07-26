@@ -11,7 +11,7 @@ namespace SeleniumParallelTest
         public void FirefoxGoogleTest()
         {
             Driver.Navigate().GoToUrl("http://www.google.com");
-            Driver.FindElement(By.Name("q")).SendKeys("Selenium");
+            Driver.FindElement(By.Name("q")).SendKeys("Selenium" + Keys.Enter);
             Driver.FindElement(By.Name("btnG")).Click();
             Assert.That(Driver.PageSource.Contains("Selenium"), Is.EqualTo(true),
                                           "The text Selenium does not exist");
@@ -25,7 +25,7 @@ namespace SeleniumParallelTest
         public void ChromeGoogleTest()
         {
             Driver.Navigate().GoToUrl("http://www.google.com");
-            Driver.FindElement(By.Name("q")).SendKeys("ExecuteAutomation");
+            Driver.FindElement(By.Name("q")).SendKeys("ExecuteAutomation" + Keys.Enter);
             Driver.FindElement(By.Name("btnG")).Click();
             Assert.That(Driver.PageSource.Contains("ExecuteAutomation"), Is.EqualTo(true),
                                           "The text ExecuteAutomation does not exist");
