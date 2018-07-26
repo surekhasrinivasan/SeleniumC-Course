@@ -30,12 +30,8 @@ namespace SeleniumFirst
         [Obsolete("The PageFactory implementation in the .NET bindings is deprecated and will be removed in a future release. This portion of the code has been migrated to the DotNetSeleniumExtras repository on GitHub (https://github.com/DotNetSeleniumTools/DotNetSeleniumExtras)")]
         public void ExecuteTest()
         {
-            Console.WriteLine("reading file");
-
             ExcelLib.PopulateInCollection(@"C:\Surekha\Data.xlsx");
 
-            Console.WriteLine("Read file");
-            
             //Login to the Application
             LoginPageObject pageLogin = new LoginPageObject();
             EAPageObject pageEA = pageLogin.Login(ExcelLib.ReadData(1, "UserName"), ExcelLib.ReadData(1, "Password"));
